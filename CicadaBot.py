@@ -4,6 +4,7 @@ from discord.ext import commands
 import json
 import platform
 from datetime import datetime as dt
+import os 
 
 DISCORDPY = f"v{discord.__version__}"
 CICADABOT = "v1.0"
@@ -29,7 +30,6 @@ async def on_ready():
     print("####################")
     print("CicadaBot is online!")
     print("####################")
-
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -122,8 +122,8 @@ async def wiki(ctx):
 ###########################################
 @bot.command()
 async def lp(ctx, page="00"):
-    filepath = f"src/lp_unmodified/{page}.jpg"
-    image = discord.File(filepath)
+    path = os.path.join("src", "lp_unmodified", f"{path}.jpg")
+    image = discord.File(path)
     await ctx.send(file=image)
 
 
@@ -161,7 +161,7 @@ async def report(ctx, *,report):
 
     embed2 = discord.Embed()
     embed2.set_thumbnail(url=thumbnail)
-    embed2.add_field(name=f"Suggestion:", value=report, inline=False)
+    embed2.add_field(name=f"Report:", value=report, inline=False)
     embed2.add_field(name="From:", value=user, inline=False)
     embed2.set_author(name="Your report has been submitted")
     await submit.send(embed=embed)
