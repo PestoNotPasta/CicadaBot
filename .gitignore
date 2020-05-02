@@ -1,3 +1,4 @@
 .vscode
 Procfile
 src/auth.json
+bot-env
