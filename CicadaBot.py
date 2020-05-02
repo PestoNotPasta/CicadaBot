@@ -55,7 +55,7 @@ async def noob(ctx):
 async def help(ctx):
     embed = discord.Embed(title="Help Menu", color=COLOR)
     embed.add_field(name=f"  `{PRE}about`  ", value="Returns some basic information about the bot and the server", inline=False)
-    embed.add_field(name=f"  `{PRE}fandom` ", value="Gives the link to the Uncovering Cicada Fandom", inline=False)
+    # embed.add_field(name=f"  `{PRE}fandom` ", value="Gives the link to the Uncovering Cicada Fandom", inline=False)
     embed.add_field(name=f"  `{PRE}help`   ", value="Returns the help menu", inline=False)
     embed.add_field(name=f"  `{PRE}lp <p>` ", value="Shows an image of the unmodified page <p> of the Liber Primus (Pg 00-74). If no page is given the first page is shown", inline=False)
     embed.add_field(name=f"  `{PRE}noob` ", value="Shows common questions that new members might have", inline=False)
@@ -64,7 +64,7 @@ async def help(ctx):
     embed.add_field(name=f"  `{PRE}report` ", value="Allows user to report abuse of the bot or its feautres", inline=False)
     embed.add_field(name=f"  `{PRE}suggest`   ", value="Allows user to suggest feature or functionality to the bot creator", inline=False)
     embed.add_field(name=f"  `{PRE}wekan`  ", value="Gives the link of the Cicada WeKan Board", inline=False)
-    embed.add_field(name=f"  `{PRE}wiki`   ", value="Gives the link to the new Wiki (still under construction)", inline=False)
+    embed.add_field(name=f"  `{PRE}wiki`   ", value="Gives the link to the Uncovering Cicada Fandom, the main wiki", inline=False)
     await ctx.send(embed=embed)
 
 # [ABOUT] - Busy
@@ -79,14 +79,14 @@ async def about(ctx):
     embed.add_field(name="Bot:", value=CICADABOT)
     await ctx.send(embed=embed)
 
-# [WIKI] - Done
-@bot.command()
-async def wiki(ctx):
-    url = command_list.get("wiki")
-    description = f"The new wiki used to help both veterans and newcomers alike.\nStill a work in progress! Try `{PRE}fandom` instead"
-    embed = discord.Embed(title="Cicada Wiki", url=url, description=description, color=COLOR)
-    embed.set_thumbnail(url=f"{bot.user.avatar_url}")
-    await ctx.send(embed=embed)
+# # [WIKI] - Done
+# @bot.command()
+# async def wiki(ctx):
+#     url = command_list.get("wiki")
+#     description = f"The new wiki used to help both veterans and newcomers alike.\nStill a work in progress! Try `{PRE}fandom` instead"
+#     embed = discord.Embed(title="Cicada Wiki", url=url, description=description, color=COLOR)
+#     embed.set_thumbnail(url=f"{bot.user.avatar_url}")
+#     # await ctx.send(embed=embed)
 
 # [WEKAN] - Done
 @bot.command()
@@ -108,12 +108,12 @@ async def reddit(ctx):
     embed.set_thumbnail(url=f"{bot.user.avatar_url}")
     await ctx.send(embed=embed)
 
-# [FANDOM] - Done
+# [WIKI] - Done
 ###########################################
 @bot.command()
-async def fandom(ctx):
+async def wiki(ctx):
     description = f"The original wiki. This is the main source of information on past solving attempts and should be read by all new members"
-    url = command_list.get("fandom")
+    url = command_list.get("wiki")
     embed = discord.Embed(title="Uncovering Cicada Fandom", url=url, description=description, color=COLOR)
     embed.set_thumbnail(url=f"{bot.user.avatar_url}")
     await ctx.send(embed=embed)
@@ -125,7 +125,6 @@ async def lp(ctx, page="00"):
     filepath = f"src/lp_unmodified/{page}.jpg"
     image = discord.File(filepath)
     await ctx.send(file=image)
-
 
 
 # Suggest
