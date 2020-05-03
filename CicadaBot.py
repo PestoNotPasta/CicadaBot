@@ -5,6 +5,7 @@ import json
 import platform
 from datetime import datetime as dt
 import os 
+from pathlib import Path
 
 DISCORDPY = f"v{discord.__version__}"
 CICADABOT = "v1.0"
@@ -31,14 +32,14 @@ async def on_ready():
     print("CicadaBot is online!")
     print("####################")
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        embed = discord.Embed(title="Error", color=discord.Color(0xff0000), description="The command you entered is invalid or doesn't exist")
-        await ctx.send(embed=embed)
-    elif isinstance(error, commands.CommandInvokeError):
-        embed = discord.Embed(title="Error", color=discord.Color(0xff0000), description="The command can't be used here")
-        await ctx.send(embed=embed)
+# @bot.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, commands.CommandNotFound):
+#         embed = discord.Embed(title="Error", color=discord.Color(0xff0000), description="The command you entered is invalid or doesn't exist")
+#         await ctx.send(embed=embed)
+#     elif isinstance(error, commands.CommandInvokeError):
+#         embed = discord.Embed(title="Error", color=discord.Color(0xff0000), description="The command can't be used here")
+#         await ctx.send(embed=embed)
 @bot.command()
 async def noob(ctx):
     embed = discord.Embed(title="Noob Guide",color=COLOR, description="Here are a few questions you might have that we're all very exhausted with answering")
@@ -121,11 +122,16 @@ async def wiki(ctx):
 # [LP] - Done
 ###########################################
 @bot.command()
+# Thanks Taiiwo :p
 async def lp(ctx, page="00"):
-    path = os.path.join("src", "lp_unmodified", f"{path}.jpg")
-    image = discord.File(path)
-    await ctx.send(file=image)
-
+    page = str(page)
+    root_dir = "src/lp_unmodified"
+    if page.isnumeric() and len(page) == 2:
+        path = os.path.join(root_dir,f"{page}.jpg")
+        image = discord.File(path)
+        await ctx.send(file=image)
+    else:
+        raise discord.errors.InvalidArgument
 
 # Suggest
 @bot.command()
